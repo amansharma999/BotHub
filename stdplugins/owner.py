@@ -27,10 +27,10 @@ async def _(event):
 
         animation_chars = [
         
-            "M\nA\nY\nU\nR",
+            "x\nc\nr\nU\nz\nh\nd\n2",
             "T\nH\nE",
             "K\nI\nN\nG",
-            "👑\nMAYUR THE KING 👑"
+            "👑\nXCRUZHD2 THE KING 👑"
 
  ]
 
