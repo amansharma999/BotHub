@@ -79,7 +79,7 @@ class Config(object):
     # foloowing plugins won't work on Heroku,
     # ⚡Remove This To Make Them Work But Would Make Bot Unstable AF...⚡
     NO_LOAD = [
-                    "pmpermit",
+                    
                     "left",
                     "autores",
                     "hand",   
@@ -148,6 +148,7 @@ class Config(object):
     GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", None)
     # get your value from https://Intellivoid.info
     LYDIA_API = os.environ.get("LYDIA_API", None)
+    LYDIA_ANTI_PM = bool(os.environ.get("LYDIA_ANTI_PM", "True"))
     # get your value from YouTube or Google.
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
     # Heroku API_Key is found under "dashboard.heroku.com/account"
@@ -161,6 +162,8 @@ class Config(object):
     REPO_LINK = os.environ.get("REPO_LINK", "https://github.com/mkaraniya/BotHub.git")
     # define "UPSTREAM_REPO_URL" in conig_vars
     UPSTREAM_REPO_URL = os.environ.get("UPSTREAM_REPO_URL", "https://github.com/mkaraniya/BotHub.git")
+    # define "HEROKU_GIT_URL" | https://git.heroku.com/YOUR_HEROKU_APP_NAME.git
+    HEROKU_GIT_URL = os.environ.get("HEROKU_GIT_URL", "YOUR HEROKU GIT URL")
     # define "heroku_link" in conig_vars 
     HEROKU_LINK = os.environ.get("HEROKU_LINK", None)
     # define "packs_content" in conig_vars
@@ -183,8 +186,8 @@ class Development(Config):
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}
-last_afkb_message = {}
+LASTMSG = {}
 admin_cmd = {}
 USER_afkb = False
-AFKREASON = None
+AFKBREASON = None
 reason = None

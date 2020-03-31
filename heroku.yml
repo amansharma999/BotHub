@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 build: 
   docker:
       worker: Dockerfile
 run:
    worker: python3 -m stdborg
+=======
+build: 
+  docker:
+      worker: Dockerfile
+run:
+   worker: python3 -m stdborg
+>>>>>>> 84b2df01eee17007a9fd377ba0a1cf4a79631a91

@@ -11,23 +11,29 @@ from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
 from uniborg.util import progress, is_read, humanbytes, time_formatter, admin_cmd
+from sample_config import Config
+from platform import python_version, uname
 
-
-
+# ================= CONSTANT =================
+DEFAULTUSER = Config.ALIVE_NAME if Config.ALIVE_NAME else uname().node
+# ============================================
 
 global USER_afkb  # pylint:disable=E0602
 global afkb_time  # pylint:disable=E0602
 global last_afkb_message  # pylint:disable=E0602
+global afkb_since # pylint:disable=E0602
 USER_afkb = {}
 afkb_time = {}
 last_afkb_message = {}
-current_time = datetime.now().strftime(" Time: %H:%M:%S \n  Date: %d/%m/%y ")
+afkb_since = {}
+# current_time = datetime.now().strftime(" Time: %H:%M:%S \n  Date: %d/%m/%y ")
 
 @borg.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_afkb(event):
     global USER_afkb  # pylint:disable=E0602
     global afkb_time  # pylint:disable=E0602
     global last_afkb_message  # pylint:disable=E0602
+    global afkb_since # pylint:disable=E0602
     current_message = event.message.message
     if ".afkb" not in current_message and "yes" in USER_afkb:  # pylint:disable=E0602
         try:
@@ -46,6 +52,7 @@ async def set_not_afkb(event):
             )
         USER_afkb = {}  # pylint:disable=E0602
         afkb_time = {}  # pylint:disable=E0602
+        afkb_since = {}  # pylint:disable=E0602
 
 
 @borg.on(events.NewMessage(pattern=r"\.afkb ?(.*)", outgoing=True))  # pylint:disable=E0602
@@ -56,9 +63,11 @@ async def _(event):
     global afkb_time  # pylint:disable=E0602
     global last_afkb_message  # pylint:disable=E0602
     global reason
+    global afkb_since # pylint:disable=E0602
     USER_afkb = {}
     afkb_time = {}
     last_afkb_message = {}
+    afkb_since = {}
     reason = event.pattern_match.group(1)
     if not USER_afkb:  # pylint:disable=E0602
         last_seen_status = await borg(  # pylint:disable=E0602
@@ -94,6 +103,7 @@ async def on_afkb(event):
     global USER_afkb  # pylint:disable=E0602
     global afkb_time  # pylint:disable=E0602
     global last_afkb_message  # pylint:disable=E0602
+    global afkb_since # pylint:disable=E0602
     afkb_since = "**A While Ago**"
     current_message_text = event.message.message.lower()
     if "afkb" in current_message_text:
@@ -130,10 +140,10 @@ async def on_afkb(event):
             else:
                 afkb_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"My Master Is **afk since** {afkb_since}" + \
+        message_to_reply = f"My Master {DEFAULTUSER} Is **afk since** {afkb_since}" + \
             f"\n\n__and HE may be back soon__\n\n**Because my King is** {reason}" \
             if reason \
-            else f"My King 👑 is **afk Since** {afkb_since} so wait until He is back.\n\n**THANKS**."
+            else f"My King 👑 {DEFAULTUSER} 👑 is **afk Since** {afkb_since} so wait until He is back.\n\n**THANKS**."
         msg = await event.reply(message_to_reply)
         await asyncio.sleep(5)
         if event.chat_id in last_afkb_message:  # pylint:disable=E0602
