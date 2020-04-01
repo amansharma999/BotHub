@@ -1,4 +1,5 @@
-""" use cmd .print and enjoy."""
+""" use cmd .print[option] and enjoy.
+option = repo, deploy, happy, happy2, yee, crying, happy3, ded, sad, lenny, packs """
 
 import asyncio
 import datetime
@@ -6,7 +7,7 @@ from telethon import events
 from telethon.tl import functions, types
 from uniborg.util import admin_cmd
 
-deploylink = Config.HEROKU_LINK
+deploylink = Config.HEROKU_GIT_URL
 repolink = Config.REPO_LINK
 packs = Config.PACKS_CONTENT
 

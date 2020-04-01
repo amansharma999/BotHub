@@ -9,12 +9,16 @@
     "stickers":
     ".kang\
 Usage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
+
 .kang [emoji('s)]\
 Usage: Works just like .kang but uses the emoji('s) you picked.\
+
 .kang [number]\
 Usage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
+
 .kang [emoji('s)] [number]\
 Usage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
+
 .stkrinfo\
 Usage: Gets info about the sticker pack."
 """

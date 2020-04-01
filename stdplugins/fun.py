@@ -31,6 +31,13 @@ PRO_STRINGS = [
      "`Pros here -_- Time to Leave`",
      "`Pros everywhere`",
      "`Pro Pro Pro ; What a tragedy`",
+
+]
+NUBSTR = [
+    "`Only few were Pro and you join the Party`",
+    "Only few were Pro and you join the Party",
+    "`Only few were Pro and you join the Party`",
+    "Only few were Pro and you join the Party",
 ]
 INSULT_STRINGS = [ 
     "`Owww ... Such a stupid idiot.`",
@@ -97,8 +104,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
          return
-    bro = random.randint(0, len(INSULT_STRINGS) - 1)    
+    bro = random.randint(0, len(NUBSTR) - 1)    
     input_str = event.pattern_match.group(1)
-    reply_text = INSULT_STRINGS[bro]
+    reply_text = NUBSTR[bro]
     await event.edit(reply_text)
 			  
