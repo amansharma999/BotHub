@@ -2,6 +2,13 @@
     .useit
     Usage: Provide links to update repo guides while you keep your changes on the floor.
  """
+from math import ceil
+import asyncio
+import json
+import random
+import re
+from telethon import events, custom
+from uniborg.util import admin_cmd, humanbytes
 
 from random import randint
 from asyncio import sleep
@@ -49,5 +56,13 @@ async def usit(e):
         "\n[Special - Note](https://telegra.ph/Special-Note-11-02)")
     
     
-
-  
+    
+@borg.on(events.NewMessage(pattern=r"\.pit", outgoing=True))
+async def pit(f):
+    await f.edit(
+        f"Here's something for {DEFAULTUSER} to use it for help_on_update on **BotHub**:\n"
+        "\n[Windows Method](buttonurl:https://telegra.ph/How-to-keep-BotHub-repo-updated-while-keeping-your-changes-through-windows-cmd-method-04-01)"
+        "\n[Termux Method](buttonurl:https://telegra.ph/How-to-keep-BotHub-repo-updated-while-keeping-your-changes-through-windows-cmd-method-04-01-2)"
+        "\n[Kali Linux Method](buttonurl:https://telegra.ph/How-to-keep-BotHub-repo-updated-while-keeping-your-changes-through-windows-cmd-method-04-01-2)"
+        "\n[Ubuntu Linux Method](buttonurl:https://telegra.ph/How-to-keep-BotHub-repo-updated-while-keeping-your-changes-through-Ubuntu-Terminal-method-04-01)"
+        "\n[Special - Note](buttonurl:https://telegra.ph/Special-Note-11-02)")
