@@ -20,6 +20,8 @@ from telethon.tl.types import (PeerChannel, ChannelParticipantsAdmins,
                                MessageEntityMentionName, MessageMediaPhoto,
                                ChannelParticipantsBots)
 
+from telethon.tl.functions.users import GetFullUserRequest
+
 #from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
 #from userbot.events import register
 
@@ -80,99 +82,10 @@ UNBAN_RIGHTS = ChatBannedRights(
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
+
+
 # ================================================
 
-
-@borg.on(admin_cmd(pattern="ungban ?(.*)", allow_sudo=True))
-async def ungban(un_gbon):
-    """ For .ungban command, Globaly ungbans the target in the userbot """
-    # Admin or creator check
-    chat = await un_gbon.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-
-    # Well
-    if not admin and not creator:
-        await un_gbon.edit(NO_ADMIN)
-        return
-
-    # If everything goes well...
-    await un_gbon.edit("`Ungbanning...`")
-
-    user = await get_user_from_event(un_gbon)
-    user = user[0]
-    if user:
-        pass
-    else:
-        return
-
-    try:
-        await un_gbon.client(
-            EditBannedRequest(un_gbon.chat_id, user.id, UNBAN_RIGHTS))
-        await un_gbon.edit("```Ungbanned Successfully```")
-
-        if BOTLOG:
-            await un_gbon.client.send_message(
-                BOTLOG_CHATID, "#UNGBAN\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {un_gbon.chat.title}(`{un_gbon.chat_id}`)")
-    except UserIdInvalidError:
-        await un_gbon.edit("`Uh oh my ungban logic broke!`")
-
-
-#@register(outgoing=True, pattern="^.gmute(?: |$)(.*)")
-@borg.on(admin_cmd(pattern="gban ?(.*)", allow_sudo=True))
-async def gban(gbon):
-    """ For .gban command, globally bans the replied/tagged person """
-    # Admin or creator check
-    chat = await gbon.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-# Well
-    if not admin and not creator:
-        await gbon.edit(NO_ADMIN)
-        return
-
-    user, reason = await get_user_from_event(gbon)
-    if user:
-        pass
-    else:
-        return
-
-    # Announce that we're going to whack the pest
-    await gbon.edit("`Whacking the pest!`")
-
-    try:
-        await gbon.client(EditBannedRequest(gbon.chat_id, user.id,
-                                           BANNED_RIGHTS))
-    except BadRequestError:
-        await gbon.edit(NO_PERM)
-        return
-    # Helps ban group join spammers more easily
-    try:
-        reply = await gbon.get_reply_message()
-        if reply:
-            await reply.delete()
-    except BadRequestError:
-        await gbon.edit(
-            "`I dont have message nuking rights! But still he was gbanned!`")
-        return
-    # Delete message and then tell that the command
-    # is done gracefully
-    # Shout out the ID, so that fedadmins can fban later
-    if reason:
-        await gbon.edit(f"`{str(user.id)}` was gbanned !!\nReason: {reason}")
-    else:
-        await gbon.edit(f"`{str(user.id)}` was gbanned !!")
-    # Announce to the logging group if we have banned the person
-    # successfully!
-    if BOTLOG:
-        await gbon.client.send_message(
-            BOTLOG_CHATID, "#GBAN\n"
-            f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-            f"CHAT: {gbon.chat.title}(`{gbon.chat_id}`)")    
-    ####
-  
 async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
     args = event.pattern_match.group(1).split(' ', 1)
@@ -221,19 +134,19 @@ async def get_user_from_id(user, event):
         return None
 
     return user_obj
+  
+@borg.on(events.NewMessage(incoming=True))
+async def on_new_message(event):
+#async def muter(moot):
 
-
-@borg.on(events.NewMessage())     
-async def muter(moot):
- """Used for deleting the messages of muted people """
-    
+    """ Used for deleting the messages of muted people """
     try:
-        from sql_helpers.spam_mute_sql import is_muted
-        from sql_helpers.gmute_sql import is_gmuted
+        from sql_helpers.locks_sql import init_locks
+        from sql_helpers.global_bans_sql import gban_user
     except AttributeError:
         return
-    muted = is_muted(moot.chat_id)
-    gmuted = is_gmuted(moot.sender_id)
+    locked = init_locks(event.chat_id, reset=False)
+    gbaned = gban_user(event.sender_id, name, reason=None)
     rights = ChatBannedRights(
         until_date=None,
         send_messages=True,
@@ -244,13 +157,103 @@ async def muter(moot):
         send_inline=True,
         embed_links=True,
     )
-    if muted:
-        for i in muted:
-            if str(i.sender) == str(moot.sender_id):
-                await moot.delete()
-                await moot.client(
-                    EditBannedRequest(moot.chat_id, moot.sender_id, rights))
-    for i in gmuted:
-        if i.sender == str(moot.sender_id):
-            await moot.delete()
+    if locked:
+        for i in locked:
+            if str(i.sender) == str(event.sender_id):
+                await event.delete()
+                await event.client(
+                    EditBannedRequest(event.chat_id, event.sender_id, rights))
+    for i in gbaned:
+        if i.sender == str(event.sender_id):
+            await event.ban()
 
+
+#@register(outgoing=True, pattern="^.ungmute(?: |$)(.*)")
+#async def ungmoot(un_gmute):
+@borg.on(events.NewMessage(pattern=r"\.ungban", outgoing=True))
+async def _(event):
+    """ For .ungban command, ungbans the target in the userbot """
+    # Admin or creator check
+    chat = await event.get_chat()
+    admin = chat.admin_rights
+    creator = chat.creator
+
+    # If not admin and not creator, return
+    if not admin and not creator:
+        await event.edit(NO_ADMIN)
+        return
+
+    # Check if the function running under SQL mode
+    try:
+        from sql_helpers.global_bans_sql import ungban_user
+    except AttributeError:
+        await event.edit(NO_SQL)
+        return
+
+    user = await get_user_from_event(event)
+    user = user[0]
+    if user:
+        pass
+    else:
+        return
+
+    # If pass, inform and start ungmuting
+    await event.edit('```Ungmuting...```')
+
+    if ungban(user.id) is False:
+        await event.edit("`Error! User probably not gbaned.`")
+    else:
+        # Inform about success
+        await event.edit("```Ungbaned Successfully```")
+
+        if BOTLOG:
+            await event.client.send_message(
+                BOTLOG_CHATID, "#UNGBAN\n"
+                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+                f"CHAT: {event.chat.title}(`{event.chat_id}`)")
+
+
+#@register(outgoing=True, pattern="^.gmute(?: |$)(.*)")
+#async def gspider(gspdr):
+@borg.on(events.NewMessage(pattern=r"\.gban", outgoing=True))
+async def _(event):
+    """ For .gban command, globally mutes the replied/tagged person """
+    # Admin or creator check
+    chat = await event.get_chat()
+    admin = chat.admin_rights
+    creator = chat.creator
+
+    # If not admin and not creator, return
+    if not admin and not creator:
+        await event.edit(NO_ADMIN)
+        return
+
+    # Check if the function running under SQL mode
+    try:
+        from sql_helpers.global_bans_sq import gban_user
+    except AttributeError:
+        await event.edit(NO_SQL)
+        return
+
+    user, reason = await get_user_from_event(event)
+    if user:
+        pass
+    else:
+        return
+
+    # If pass, inform and start gmuting
+    await event.edit("`Grabs a huge, sticky duct tape!`")
+    if gban(user.id) is False:
+        await event.edit(
+            '`Error! User probably already gbaned.\nRe-rolls the tape.`')
+    else:
+        if reason:
+            await event.edit(f"`Globally taped!`Reason: {reason}")
+        else:
+            await event.edit("`Globally taped!`")
+
+        if BOTLOG:
+            await event.client.send_message(
+                BOTLOG_CHATID, "#GBAN\n"
+                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+                f"CHAT: {event.chat.title}(`{event.chat_id}`)")
