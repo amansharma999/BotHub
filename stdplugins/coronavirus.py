@@ -1,9 +1,9 @@
 """CoronaVirus LookUp
-Syntax: .coronavirus <country>"""
+Syntax: .COD19 <country>"""
 from covid import Covid
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="coronavirus (.*)"))
+@borg.on(admin_cmd(pattern="COD19 (.*)"))
 async def _(event):
     covid = Covid()
     data = covid.get_data()
@@ -16,6 +16,6 @@ async def _(event):
 
 def get_country_data(country, world):
     for country_data in world:
-        if country_data["country"] == country:
+        if country_data["country"].lower() == country.lower():
             return country_data
     return {"Status": "No information yet about this country!"}

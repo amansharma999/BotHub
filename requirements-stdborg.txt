@@ -6,7 +6,7 @@ beautifulsoup4
 coffeehouse>=2.1.0
 cowpy
 cfscrape
-# cryptg
+cryptg
 emoji
 googletrans>=2.4.0
 google_images_download>=2.7.1
@@ -59,3 +59,6 @@ hurry.filesize
 pymongo
 telethon-session-sqlalchemy>=0.2.6
 TgCrypto>=1.2.0
+SpeechRecognition>=3.4.6
+covid
+wheel>=0.30.0a0
