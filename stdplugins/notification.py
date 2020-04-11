@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """Notification Manager for @UniBorg
 .nccreatedch
 .nolog
@@ -622,4 +621,3 @@ async def do_log_pm_action(chat_id, message_text, message_media):
         file=message_media,
         silent=True
     )
->>>>>>> 823ef9e0fd99cc5d990aed0fadbe6013eda07cc9
