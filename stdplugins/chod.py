@@ -21,7 +21,7 @@ async def _(event):
 
     animation_interval = 5
 
-    animation_ttl = range(0, 11)
+    animation_ttl = range(0, 12)
 
     input_str = event.pattern_match.group(1)
 
@@ -49,4 +49,4 @@ async def _(event):
 
             await asyncio.sleep(animation_interval)
 
-            await event.edit(animation_chars[i % 11])
+            await event.edit(animation_chars[i % 12])
