@@ -49,7 +49,7 @@
       "required": false
     },
     "ALIVE_NAME": {
-      "description": "Name to show in .alive message",
+      "description": "Name to show in .alive message, Now very important do fill all the values of this form for better UserBot functionning.",
       "required": false
     },
     "API_URL": {
@@ -192,8 +192,9 @@
       "value": "9"
     },
     "COMMAND_HAND_LER": {
-      "description": "specify command handler that should be used for the plugins. This should be a valid \"regex\" pattern",
-      "value": "\."
+      "description": "specify command handler that should be used for the plugins. Get it from \"https://del.dog/ahekirewim.txt\" or else This should be a valid \"regex\" pattern",
+      "value": "",
+      "required": false
     },
     "SUDO_USERS": {
       "description": "Makes Your Account Stable.",
@@ -315,6 +316,12 @@
     }
   }],
   "buildpacks": [{
+    "url": "https://github.com/heroku/heroku-buildpack-python"
+  }, {
+    "url": "https://github.com/heroku/heroku-buildpack-redis"
+  }, {
+    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+  },{
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
   }, {
     "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
@@ -325,7 +332,7 @@
   }, {
     "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
   }, {
-    "url": "heroku/python"
+    "url": "https://github.com/stevo550/buildpack-slug-cleaner"
   }],
 "Global Variables": [{
     "COUNT_MSG": "0"
