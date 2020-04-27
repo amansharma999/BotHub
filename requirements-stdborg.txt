@@ -1,4 +1,4 @@
-faiofiles
+aiofiles
 chromedriver>=2.21
 bs4
 opencv-contrib-python
