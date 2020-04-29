@@ -125,7 +125,7 @@ async def upstream(ups):
             await ups.edit(
                 f"**Unfortunately, the directory {error} does not seem to be a git repository.\
                 \nOr Maybe it just needs a sync verification with {GIT_REPO_NAME}\
-            \nBut we can fix that by force updating the userbot using** `.updateme now`"
+            \nBut we can fix that by force updating the userbot using** `.updateme now`."
             )
             return
         repo = Repo.init()
@@ -177,7 +177,7 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond('`do \".updateme now\" to update`')
+        await ups.respond('do \"`.updateme now`\" to update')
         return
 
     if force_updateme:
