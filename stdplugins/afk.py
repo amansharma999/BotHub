@@ -90,9 +90,9 @@ async def _(event):
             afkb_time = datetime.datetime.now()  # pylint:disable=E0602
         USER_AFKB = f"yes: {reason}"  # pylint:disable=E0602
         if reason:
-            await borg.send_message(event.chat_id, f"**My King 👑 {DEFAULTUSER} 👑 is Going afk!** __because ~ {reason}__")
+            await borg.send_message(event.chat_id, f"**My King 👑 {DEFAULTUSER} 👑 is Going afk!** __because My Master is {reason}__")
         else:
-            await borg.send_message(event.chat_id, f"**My King 👑 {DEFAULTUSER} 👑 is Going afk!**")
+            await borg.send_message(event.chat_id, f"**My King 👑 {DEFAULTUSER} 👑 is Going afk!** __because My Master is {AFKSK}__")
         await asyncio.sleep(5)
         await event.delete()
         try:
@@ -188,8 +188,8 @@ async def on_afkb(event):
             else:
                 afkb_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"My Master {DEFAULTUSER} Is **afk since** {total_afkb_time}" + \
-            f"\n__and HE may be back soon__\n**Because my King is** {reason}" \
+        message_to_reply = f"My Master {DEFAULTUSER} Is {reason} **Since** {total_afkb_time}" + \
+            f"\n__and HE may be back soon__\n**Just wait for my King's Reply" \
             if reason \
             else f"My King 👑 {DEFAULTUSER} 👑 is **afk Since** {total_afkb_time}. \nand My King has left a word for you only: \n{AFKSK}\n`.` "
         msg = await event.reply(message_to_reply)
