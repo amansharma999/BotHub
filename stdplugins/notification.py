@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """Notification Manager for @UniBorg
 .nccreatedch
 .nolog
