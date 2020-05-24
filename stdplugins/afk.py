@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+
 =======
 # Credits to https://t.me/anubisxx for this plugin
 # Offline / Online credits to https://t.me/DevP73
 
->>>>>>> 9332388f59e0734c8beaa48e498e2968c862fb7d
+ 
 
 """AFK Plugin for @UniBorg
 Syntax: .afk REASON"""
@@ -28,7 +28,7 @@ from telethon.tl.functions.account import UpdateProfileRequest
 from uniborg.util import progress, is_read, humanbytes, time_formatter, admin_cmd
 from sample_config import Config
 from platform import python_version, uname
->>>>>>> 9332388f59e0734c8beaa48e498e2968c862fb7d
+
 
 
 global USER_AFK  # pylint:disable=E0602
@@ -72,11 +72,11 @@ async def _(event):
     global afk_time  # pylint:disable=E0602
     global last_afk_message  # pylint:disable=E0602
     global reason
-<<<<<<< HEAD
+
     USER_AFK = {}
     afk_time = None
     last_afk_message = {}
-=======
+
     user = await borg.get_me()
     USER_AFKB = {}
     afkb_time = None
@@ -84,7 +84,7 @@ async def _(event):
     afkb_end = {}
     start_1 = datetime.now()
     afkb_start = start_1.replace(microsecond=0)
->>>>>>> 9332388f59e0734c8beaa48e498e2968c862fb7d
+
     reason = event.pattern_match.group(1)
     if not USER_AFK:  # pylint:disable=E0602
         last_seen_status = await borg(  # pylint:disable=E0602
@@ -98,15 +98,15 @@ async def _(event):
         if reason:
             await event.edit(f"Set AFK mode to True, and Reason is {reason}")
         else:
-<<<<<<< HEAD
+
             await event.edit(f"Set AFK mode to True")
-=======
+
             await borg.send_message(event.chat_id, f"**My King 👑 {DEFAULTUSER} 👑 is Going afk!** __because My Master is {AFKSK}__")
     if user.last_name:
         await event.client(UpdateProfileRequest(first_name=user.first_name, last_name=user.last_name + " [ OFFLINE ]"))
     else:
         await event.client(UpdateProfileRequest(first_name=user.first_name, last_name=" [ OFFLINE ]"))
->>>>>>> 9332388f59e0734c8beaa48e498e2968c862fb7d
+
         await asyncio.sleep(5)
         await event.delete()
         try:
@@ -118,8 +118,8 @@ async def _(event):
             logger.warn(str(e))  # pylint:disable=E0602
 
 
-<<<<<<< HEAD
-=======
+
+
 @borg.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_afkb(event):
     global USER_AFKB  # pylint:disable=E0602
@@ -160,7 +160,7 @@ async def set_not_afkb(event):
         afkb_time = None  # pylint:disable=E0602
 
 
->>>>>>> 9332388f59e0734c8beaa48e498e2968c862fb7d
+
 @borg.on(events.NewMessage(  # pylint:disable=E0602
     incoming=True,
     func=lambda e: bool(e.mentioned or e.is_private)
