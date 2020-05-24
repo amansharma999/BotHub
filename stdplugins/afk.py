@@ -1,5 +1,5 @@
 
-=======
+
 # Credits to https://t.me/anubisxx for this plugin
 # Offline / Online credits to https://t.me/DevP73
 
@@ -9,10 +9,9 @@
 Syntax: .afk REASON"""
 import asyncio
 import datetime
-<<<<<<< HEAD
 from telethon import events
 from telethon.tl import functions, types
-=======
+
 from datetime import datetime
 import shutil 
 import random, re
