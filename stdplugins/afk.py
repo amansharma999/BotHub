@@ -1,4 +1,4 @@
-dhehdh# Credits to https://t.me/anubisxx for this plugin
+# Credits to https://t.me/anubisxx for this plugin
 # Offline / Online credits to https://t.me/DevP73
 
 
