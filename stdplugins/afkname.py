@@ -66,7 +66,7 @@ afkb_start = {}
 
 AFKSK = str(choice(AFKSTR))
 
-@borg.on(events.NewMessage(pattern=r"\.afkb ?(.*)", outgoing=True))  # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.xcruzhd2 ?(.*)", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
