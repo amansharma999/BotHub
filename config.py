@@ -1,4 +1,5 @@
 from sample_config import Config
+import os
 
 class Config(Config):
     #TG_BOT_TOKEN = "1365498867:AAHt3VWAHnG_PxMJgHpLgY4Uv4wdvNy8I2w"
