@@ -130,11 +130,11 @@ class Config(Config):
     G_DRIVE_CLIENT_ID = None
     G_DRIVE_CLIENT_SECRET = None
     GDRIVE_FOLDER_ID = None
-    AUTH_TOKEN_DATA =  None
-    os.makedirs(TMP_DOWNLOAD_DIRECTORY, exist_ok=True)
-    t_file = open(TMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
-    t_file.write(AUTH_TOKEN_DATA)
-    t_file.close()
+    #AUTH_TOKEN_DATA =  None
+    #os.makedirs(TMP_DOWNLOAD_DIRECTORY, exist_ok=True)
+    #t_file = open(TMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
+    #t_file.write(AUTH_TOKEN_DATA)
+    #t_file.close()
     #
     TELE_GRAM_2FA_CODE = None
     #
