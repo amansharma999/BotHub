@@ -90,7 +90,7 @@ class Config(Config):
     # feel free to use http://telegram.dog/Remove_BGBot
     REM_BG_API_KEY = "TZ2e5YStFqGYQEUQhiyXAW6q"
     # you can set any name here
-    SLAP_USERNAME = xcruzhd2
+    SLAP_USERNAME = "xcruzhd2"
     # Get this from Github
     GITHUB_ACCESS_TOKEN = "7af24488fbe9336ffa147b849fb160a502ec4535"
     GIT_REPO_NAME = "amansharma999/BotHub"
