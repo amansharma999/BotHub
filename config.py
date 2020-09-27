@@ -106,7 +106,7 @@ class Config(Config):
     # For Databases
     # can be None in which case plugins requiring
     # DataBase would not work
-    #DB_URI = os.environ.get("DATABASE_URL", None)
+    DB_URI = "mongodb+srv://amansharma123:amansharma123@cluster0.mehrz.mongodb.net/<dbname>?retryWrites=true&w=majority"
     # For Databases
     # can be None in which case plugins requiring
     # DataBase would not work
