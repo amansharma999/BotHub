@@ -106,11 +106,11 @@ class Config(Config):
     # For Databases
     # can be None in which case plugins requiring
     # DataBase would not work
-    DB_URI = "mongodb+srv://amansharma123:amansharma123@cluster0.mehrz.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    DB_URI = "mongodb://amansharma123:amansharma123@cluster0.mehrz.mongodb.net/<dbname>?retryWrites=true&w=majority"
     # For Databases
     # can be None in which case plugins requiring
     # DataBase would not work
-    MONGO_URI = "mongodb+srv://amansharma123:amansharma123@cluster0.mehrz.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    MONGO_URI = "mongodb//amansharma123:amansharma123@cluster0.mehrz.mongodb.net/<dbname>?retryWrites=true&w=majority"
     # number of rows of buttons to be displayed in .helpme command
     NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = 10
     # specify command handler that should be used for the plugins
