@@ -29,7 +29,7 @@ class Config(Config):
     # some people upload their session files on GitHub or other third party hosting
     # websites, this might prevent the un-authorized use of the
     # confidential session files
-    HU_STRING_SESSION = "1BVtsOH4BuyMOVOD4PNMqNQLuPhzRiJdW3D03OuiBSbQ42vbNAqRpa1nnGcA1QF3dOG4UWp-1HtGFeoCJZlt5VbtKVTOUsn1JerW18sadaJa8jOxb7HfSlSkvK0Vjf4TTMOpx8Cs3Lh5Kzj9wGs5hwHGii43U8S-6xJjyHCA0JLbF2dcPGA8hRNyp6-Je0HKUeyYjaeY7sk6SFibwwW1BpKZQc-lRF6gxCqfdoVrzRQuhX1TlmwrsX5xGfjplAg1PmUZJ05kx9xUYsEziqsFe0h6U-3yTziMMWrdemagd-f5U5t4zfbbJTcX6Gj0q1zcssbRh7B21-MY6Txld3SYu9kaKnpFusQA="
+    HU_STRING_SESSION = None #"1BVtsOH4BuyMOVOD4PNMqNQLuPhzRiJdW3D03OuiBSbQ42vbNAqRpa1nnGcA1QF3dOG4UWp-1HtGFeoCJZlt5VbtKVTOUsn1JerW18sadaJa8jOxb7HfSlSkvK0Vjf4TTMOpx8Cs3Lh5Kzj9wGs5hwHGii43U8S-6xJjyHCA0JLbF2dcPGA8hRNyp6-Je0HKUeyYjaeY7sk6SFibwwW1BpKZQc-lRF6gxCqfdoVrzRQuhX1TlmwrsX5xGfjplAg1PmUZJ05kx9xUYsEziqsFe0h6U-3yTziMMWrdemagd-f5U5t4zfbbJTcX6Gj0q1zcssbRh7B21-MY6Txld3SYu9kaKnpFusQA="
     # Get your own APPID from https://api.openweathermap.org/data/2.5/weather
     OPEN_WEATHER_MAP_APPID = "9d23649c66852b6b3838138bd5e7b571"
     # Your City
