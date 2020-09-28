@@ -10,6 +10,7 @@ class Config(Config):
     LOGGER = True
     # Get this value from my.telegram.org! Please do not steal
     APP_ID = 1108982
+    ENV = "ANYTHING"
     API_HASH = "babad37bef120d5c76a1fa02e3c2b5f5"
     # Photo Chat - Get this value from http://antiddos.systems
     API_TOKEN = "d6e8bf28-226c-420b-8baa-56ccb53f2db9"
